@@ -22,7 +22,6 @@ defcon==0.6.0
 fs==2.4.11
 future==0.18.2
 gast==0.2.2
-google-pasta==0.2.0
 grpcio==1.28.0rc3
 h5py==2.10.0
 idna==2.8
@@ -49,12 +48,8 @@ pandas==0.25.1
 protobuf==3.11.3
 pyclipper==1.1.0.post3
 pycparser==2.20
-pylint==1.9.1
 python-dateutil==2.8.1
-python-magic==0.4.15
-pytz==2019.3
 requests==2.22.0
-resampy==0.2.2
 s3transfer==0.3.3
 schedule==0.6.0
 scikit-learn==0.22.2.post1
@@ -66,11 +61,7 @@ tensorflow==1.15.0
 tensorflow-estimator==1.15.1
 termcolor==1.1.0
 tqdm==4.43.0
-typing-extensions==3.7.4.1
-unicodedata2==13.0.0.post2
 urllib3==1.25.8
 websockets==8.1
 werkzeug==1.0.0
 wrapt==1.10.11
-yarl==1.4.2
-zipp==3.1.0
