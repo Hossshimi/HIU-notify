@@ -1,1 +1,1 @@
-worker: python get_and_notify.py
+worker: python portal.py
