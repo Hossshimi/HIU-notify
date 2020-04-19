@@ -12,12 +12,12 @@ from selenium.webdriver.common.keys import Keys
 WAITTIME = 10
 
 options = Options()
-options.binary_location = '/app/.apt/usr/bin/google-chrome'
+#options.binary_location = '/app/.apt/usr/bin/google-chrome'
 options.add_argument('--disable-gpu')
 options.add_argument('--disable-extensions')
-options.add_argument('--proxy-server="direct://"')
-options.add_argument('--proxy-bypass-list=*')
-options.add_argument('--start-maximized')
+#options.add_argument('--proxy-server="direct://"')
+#options.add_argument('--proxy-bypass-list=*')
+#options.add_argument('--start-maximized')
 options.add_argument('--headless')
 
 s3 = boto3.resource("s3",
@@ -39,6 +39,7 @@ def func():
     webdrv = webdriver.Chrome(chrome_options=options)
     webdrv.get(url)
     time.sleep(WAITTIME)
+    print(webdrv.page_source)
     webdrv.find_element_by_xpath("/html/body/div/div/main/div/div/a").click()
     time.sleep(WAITTIME)
     webdrv.find_element_by_xpath('//*[@id="username"]').send_keys("s2021140")
