@@ -37,7 +37,7 @@ def func():
     url = os.environ.get("portalurl")
     webdrv = webdriver.Chrome()
     webdrv.get(url)
-    webdrv.find_element_by_css_selector("body > div > div > main > div > div > a").click()
+    webdrv.find_element_by_xpath("/html/body/div/div/main/div/div/a").click()
     time.sleep(WAITTIME)
     webdrv.find_element_by_xpath('//*[@id="username"]').send_keys("s2021140")
     webdrv.find_element_by_xpath('//*[@id="password"]').send_keys("Andromeda_77")
