@@ -36,7 +36,7 @@ def func():
     print("triggered")
     http = urllib3.PoolManager()
     url = os.environ.get("portalurl")
-    webdrv = webdriver.Chrome()
+    webdrv = webdriver.Chrome(chrome_options=options)
     webdrv.get(url)
     time.sleep(WAITTIME)
     webdrv.find_element_by_xpath("/html/body/div/div/main/div/div/a").click()
