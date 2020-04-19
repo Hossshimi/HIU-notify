@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 WAITTIME = 10
 
 options = Options()
-#options.binary_location = '/app/.apt/usr/bin/google-chrome'
+options.binary_location = '/app/.apt/usr/bin/google-chrome'
 options.add_argument('--disable-gpu')
 options.add_argument('--disable-extensions')
 #options.add_argument('--proxy-server="direct://"')
