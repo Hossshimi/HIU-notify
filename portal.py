@@ -3,16 +3,20 @@ from bs4 import BeautifulSoup
 import os
 import schedule
 import time
-import difflib
+#import difflib
 import urllib3
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+import requests
+import json
 
 WAITTIME = 10
+LOCATION = '/app/.apt/usr/bin/google-chrome'
+#LOCATION = "C:\Program Files (x86)\Google\Chrome\Application"
 
 options = Options()
-options.binary_location = '/app/.apt/usr/bin/google-chrome'
+options.binary_location = LOCATION
 options.add_argument('--disable-gpu')
 options.add_argument('--disable-extensions')
 #options.add_argument('--proxy-server="direct://"')
@@ -40,11 +44,14 @@ def func():
     webdrv.get(url)
     time.sleep(WAITTIME)
     print(webdrv.page_source)
-    webdrv.find_element_by_xpath("/html/body/div/div/main/div/div/a").click()
+    webdrv.find_element_by_css_selector("body > div > div > main > div > div > a:nth-child(6)").click()
+    print("select login method")
     time.sleep(WAITTIME)
-    webdrv.find_element_by_xpath('//*[@id="username"]').send_keys("s2021140")
-    webdrv.find_element_by_xpath('//*[@id="password"]').send_keys("Andromeda_77")
-    webdrv.find_element_by_css_selector("#submit").click()
+    webdrv.find_element_by_css_selector('#identifierId').send_keys(os.environ.get("loginid\n"))
+    print("input id")
+    time.sleep(WAITTIME)
+    webdrv.find_element_by_css_selector('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(os.environ.get("loginpass\n"))
+    print("input pass")
     time.sleep(WAITTIME)
     html = webdrv.page_source
     html = html[html.find("<tbody>"):html.find("</tbody>")+8]
@@ -65,16 +72,23 @@ def func():
 
     if dlist:
         line_token = os.environ.get("LINE_TOKEN")
-        line_url = "https://notify-api.line.me/api/notify"
-        headers = {"Authorization": "Bearer " + line_token}
+        line_url = "https://api.line.me/v2/bot/message/broadcast"
+        line_header = {"Authorization": "Bearer " + line_token}
         msg = "[ HIU Portalが更新されました ]\n"
         for d in dlist:
             msg += d[1] + "\n" + d[0] + "\n\n"
-        fields = {"message": msg}
+        fields = {"messages": msg}
         http.request("POST",
                     line_url,
-                    headers=headers,
+                    headers=line_header,
                     fields=fields)
+        dtm_url = os.environ.get("DTMST_URL")
+        msg_dtm = ""
+        for d in dlist:
+            msg_dtm += f"<{d[0]}|{d[1]}>\n"
+        fields_dtm = {"text": msg_dtm}
+        res_dtm = requests.post(dtm_url,data=json.dumps(fields_dtm))
+
         new = ""
         for i in range(len(links)):
             new += links[i] + "\n" + texts[i] + "\n"
@@ -85,10 +99,11 @@ def func():
     webdrv.quit()
     print("finished")
 
-schedule.every(10).minutes.do(func)
+schedule.every().minute.at(":01").do(func)
+schedule.every().minute.at(":31").do(func)
 func()
 
 while True:
-    #print("check...")
-    schedule.run_pending()
+    if (time.gmtime()[3] < 22-9) or (21 < time.gmtime()[3]):
+        schedule.run_pending()
     time.sleep(10)
