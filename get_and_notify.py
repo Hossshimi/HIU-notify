@@ -38,9 +38,6 @@ def do():
                 ContentEncoding="utf-8",
                 ContentType="text/plane")
 
-    #with open("res.txt","w",encoding="utf-8") as f:
-    #    f.write(link+"\n"+title.split(" ")[-1])
-
 schedule.every(10).minutes.do(do)
 
 while True:

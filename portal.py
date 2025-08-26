@@ -13,15 +13,11 @@ import json
 
 WAITTIME = 10
 LOCATION = '/app/.apt/usr/bin/google-chrome'
-#LOCATION = "C:\Program Files (x86)\Google\Chrome\Application"
 
 options = Options()
 options.binary_location = LOCATION
 options.add_argument('--disable-gpu')
 options.add_argument('--disable-extensions')
-#options.add_argument('--proxy-server="direct://"')
-#options.add_argument('--proxy-bypass-list=*')
-#options.add_argument('--start-maximized')
 options.add_argument('--headless')
 
 s3 = boto3.resource("s3",
@@ -62,13 +58,6 @@ def func():
     for i,l in enumerate(links):
         if not (l in old_links):
             dlist.append((l,texts[i]))
-
-    #new_ = ""
-    #for i in range(len(links)):
-    #    new_ += links[i] + "\n" + texts[i] + "\n"
-    #new_ = new_[:-1]
-    #with open("old.txt","w",encoding="utf-8") as f:
-    #    f.write(new_)
 
     if dlist:
         line_token = os.environ.get("LINE_TOKEN")
