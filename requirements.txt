@@ -15,6 +15,6 @@ termcolor==1.1.0
 tqdm==4.43.0
 urllib3==1.25.8
 websockets==8.1
-werkzeug==1.0.0
+werkzeug==3.0.6
 wrapt==1.10.11
 selenium==3.141.0
