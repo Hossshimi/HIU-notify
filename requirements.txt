@@ -12,7 +12,7 @@ six==1.14.0
 soupsieve==1.9.5
 tensorboard==1.15.0
 termcolor==1.1.0
-tqdm==4.43.0
+tqdm==4.66.3
 urllib3==1.25.8
 websockets==8.1
 werkzeug==1.0.0
